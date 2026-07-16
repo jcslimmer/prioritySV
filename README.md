@@ -47,7 +47,8 @@ This script processes single-sample **gcSV**, **Manta**, and **SurVeyor** VCFs. 
 > - There are currently no plans to update the scripts for compatibility with newer HitSV and SurVeyor releases. However, post an issue if running into errors and I will look into it as the fix should be fairly straightforward.
 > - gcSV v1.0.0 can be obtained from **[INSERT gcSV v1.0.0 LINK HERE]**.
 > - SurVeyor v0.11.0 can be obtained from **[INSERT SurVeyor v0.11.0 LINK HERE]**.
-> - **Manta**
+
+> **Manta**
 > - These scripts were developed and tested using **Manta v1.6.0**.
 
 ### Required options

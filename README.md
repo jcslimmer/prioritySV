@@ -16,7 +16,13 @@ If only the SV merging is required then clone this repository:
 
 If allele frequency estimates or tandem repeat/segmental duplication annotation of SVs are required then download the following file to the main prioritySV directory:
 
-`wget Zenodo link with tarball
+`wget Zenodo link with tarball`
 
-tar -xzvf prioritySV_afreq_trsegdup_files.tar`
+`tar -xzvf prioritySV_afreq_trsegdup_files.tar`
 
+
+## Usage
+
+SurveYor, gcSV and Manta
+
+# Note: **gcSV v1.0.0 was used and no longer exists due to it being renamed and re-released as HitSV (https://github.com/hitbc/HitSV). The scripts may not be compatible with potential updates made to the HitSV VCFs and I currently have no plans at the moment to update them for compatibility. gcSV v1.0.0 can be obtained from here:**

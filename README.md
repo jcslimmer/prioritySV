@@ -22,7 +22,7 @@ If allele frequency estimates or tandem repeat/segmental duplication annotation 
 
 ## Usage
 
-`ensemble_sv_script.sh -i gcsv.vcf,manta.vcf,surveyor.vcf -s sample_id -r reference.fa -o /path/to/output_dir`
+`prioritysv.sh -i gcsv.vcf,manta.vcf,surveyor.vcf -s sample_id -r reference.fa -o /path/to/output_dir`
 
 This script processes single-sample **gcSV**, **Manta**, and **SurVeyor** VCFs. Structural variants are split by SV type and size, then merged according to a predefined priority order.
 

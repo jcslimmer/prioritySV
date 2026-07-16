@@ -20,11 +20,54 @@ If allele frequency estimates or tandem repeat/segmental duplication annotation 
 
 `tar -xzvf prioritySV_afreq_trsegdup_files.tar`
 
-
 ## Usage
 
-SurveYor, gcSV and Manta
+`ensemble_sv_script.sh -i gcsv.vcf,manta.vcf,surveyor.vcf -s sample_id -r reference.fa -o /path/to/output_dir`
 
-# Note:
+This script processes single-sample **gcSV**, **Manta**, and **SurVeyor** VCFs. Structural variants are split by SV type and size, then merged according to a predefined priority order.
 
-**gcSV v1.0.0 was used and no longer exists due to it being renamed and re-released as HitSV (https://github.com/hitbc/HitSV). The scripts may not be compatible with potential updates made to the HitSV VCFs and I currently have no plans at the moment to update them for compatibility. gcSV v1.0.0 can be obtained from here:**
+> [!NOTE]
+> **Dependencies**
+> - Truvari v5.3.0
+> - bcftools (tested with v1.15.1)
+> - bedtools (tested with v2.29.0)
+>
+> All dependencies must be installed and available in your `PATH`.
+>
+> **Optional dependency**
+> - ANNOVAR (required only when using `--annovar-dir`)
+> - The `/annovar/` directory must also be available in your `PATH`.
+>
+> **Caller compatibility**
+>
+> **gcSV and SurVeyor**
+> - These scripts were developed and tested using **gcSV v1.0.0** and **SurVeyor v0.11.0**.
+> - gcSV has since been renamed and re-released as **HitSV**: https://github.com/hitbc/HitSV
+> - The scripts may **not** be compatible with VCF format changes introduced in newer HitSV and SurVeyor releases.
+> - There are currently no plans to update the scripts for compatibility with newer HitSV and SurVeyor releases.
+> - However, post an issue if running into errors and I will look into it as the fix should be fairly straightforward.
+> - gcSV v1.0.0 can be obtained from **[INSERT gcSV v1.0.0 LINK HERE]**.
+> - SurVeyor v0.11.0 can be obtained from **[INSERT SurVeyor v0.11.0 LINK HERE]**.
+> **Manta**
+> - These scripts were developed and tested using **Manta v1.6.0**.
+
+### Required options
+
+| Option | Description |
+| :----- | :---------- |
+| `-i`, `--input-vcfs` | Comma-separated list of input SV VCF files (gcSV, Manta, SurVeyor). |
+| `-s`, `--sample` | Sample name. |
+| `-r`, `--ref-fasta` | Reference FASTA file. |
+| `-o`, `--output-dir` | Output directory. |
+
+### Optional options
+
+| Option | Description |
+| :----- | :---------- |
+| `-h`, `--help` | Display the help message. |
+| `-t`, `--threads` | Number of CPU threads to use. |
+| `-a`, `--annovar-dir` | Annotate the merged SV VCF with ANNOVAR gene-based annotations. Specify the path to the `/annovar/` directory. |
+| `-f`, `--allele-frequency` | Annotate the merged SV VCF with allele frequencies from gnomAD-SV, ONT-1KGP, and CoLoRS. |
+| `-d`, `--repeat-sd` | Annotate the merged SV VCF with UCSC Simple Repeats and Segmental Duplications coverage. |
+| `-b`, `--include-bnd` | Include BND structural variants in the merged output. |
+| `-n`, `--include-nosvlen` | Include INS and INV variants with missing or zero `SVLEN` values in the merged output. |

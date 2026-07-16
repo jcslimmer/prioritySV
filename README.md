@@ -11,9 +11,12 @@ Requires Truvari v5.3.0, bcftools (only tested v1.15.1), and bedtools (only test
 **Note:** Other bcftools, bedtools and pysam versions should work, but carefully check output for what is expected
 
 If only the SV merging is required then clone this repository:
+
 `git clone https://github.com/jcslimmer/prioritySV`
 
 If allele frequency estimates or tandem repeat/segmental duplication annotation of SVs are required then download the following file to the main prioritySV directory:
+
 `wget Zenodo link with tarball
+
 tar -xzvf prioritySV_afreq_trsegdup_files.tar`
 

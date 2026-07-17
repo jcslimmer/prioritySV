@@ -38,7 +38,7 @@ This script processes single-sample **gcSV**, **Manta**, and **SurVeyor** VCFs. 
 > - ANNOVAR (required only when using `--annovar-dir`)
 > - The `/annovar/` directory must also be available in your `PATH`.
 >
-> **SV caller compatibility**
+> ######**SV caller compatibility**
 >
 > **gcSV and SurVeyor**
 > - These scripts were developed and tested using **gcSV v1.0.0** and **SurVeyor v0.11.0**.

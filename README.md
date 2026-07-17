@@ -1,10 +1,16 @@
 # prioritySV
 Merge SurVeyor, hitSV/gcSV and Manta VCFs based on benchmarking of their matching accuracy by SV type and in specific SV size bins.
 
+For insertions/duplicatons, the priority orders in descending order per size bin are: <200bp (SurVeyor, gcSV, Manta), 200-500bp (gcSV, SurVeyor, Manta), 500bp+ (SurVeyor, gcSV, Manta).
+
+For deletions, the priority orders in descending order per size bin are: <200bp (gcSV, SurVeyor, Manta), 200-1000bp (SurVeyor, gcSV, Manta), 1kb+ (SurVeyor, Manta, gcSV).
+
+Inversions are merged using the priority order (SurVeyor, gcSV, Manta) if they have at least 10% reciprocal overlap and 50% size similarity. 
+
 ## Benchmarking data and analyses
 The VCFs used for benchmarking (which the priority order for merging SVs is based off) can be found at (zenodo link).
 
-Scripts for processing/standardising the VCFs for Truvari bench and running the database matching analyses can be found in the benchmarking_analyses folder.
+Scripts for processing/standardising the VCFs for Truvari bench and running the SV database matching analyses can be found in the benchmarking_analyses folder.
 
 ## Installation
 If only the SV merging is required then clone this repository:
@@ -21,13 +27,7 @@ If allele frequency estimates or tandem repeat/segmental duplication annotation 
 
 `prioritysv.sh -i gcsv.vcf,manta.vcf,surveyor.vcf -s sample_id -r reference.fa -o /path/to/output_dir`
 
-This script processes single-sample **gcSV**, **Manta**, and **SurVeyor** VCFs. Structural variants are split by SV type and size, then merged according to a predefined priority order.
-
-For insertions/duplicatons, the priority orders in descending order per size bin are: <200bp (SurVeyor, gcSV, Manta), 200-500bp (gcSV, SurVeyor, Manta), 500bp+ (SurVeyor, gcSV, Manta).
-
-For deletions, the priority orders in descending order per size bin are: <200bp (gcSV, SurVeyor, Manta), 200-1000bp (SurVeyor, gcSV, Manta), 1kb+ (SurVeyor, Manta, gcSV).
-
-Inversions are merged using the priority order (SurVeyor, gcSV, Manta) if they have at least 10% reciprocal overlap and 50% size similarity. 
+This script processes single-sample **gcSV**, **Manta**, and **SurVeyor** VCFs. Structural variants are split by SV type and size, then merged according to the priority order defined above.
 
 > [!NOTE]
 > **Dependencies**
@@ -76,3 +76,20 @@ Inversions are merged using the priority order (SurVeyor, gcSV, Manta) if they h
 | `-d`, `--repeat-sd` | Annotate the merged SV VCF with UCSC Simple Repeats and Segmental Duplications coverage. |
 | `-b`, `--include-bnd` | Include BND structural variants in the merged output. |
 | `-n`, `--include-nosvlen` | Include INS and INV variants with missing or zero `SVLEN` values in the merged output. |
+
+### Allele Frequency and Repeat Annotation INFO Fields
+
+| INFO field | Description |
+| :--------- | :---------- |
+| `ONT_1KGP_AF` | Allele frequency of the matched structural variant in the ONT-1KGP cohort (450 high-coverage ONT sequenced samples from the 1000 Genomes Project). |
+| `ONT_1KGP_COORDS` | Coordinates of the matched ONT-1KGP structural variant. |
+| `ONT_1KGP_PctSizeSim` | Size similarity (%) between the query SV and the matched ONT-1KGP SV. |
+| `ONT_1KGP_PctRecOverlap` | Reciprocal overlap (%) between the query SV and the matched ONT-1KGP SV. **Note:** This is unreliable for insertions and duplications because insertions may be represented as duplications (and vice versa). It may only be useful for deletions. |
+| `ONT_1KGP_SizeDiff` | Size difference (bp) between the query SV and the matched ONT-1KGP SV. |
+| `ONT_1KGP_StartDist` | Difference (bp) between the start coordinates of the query SV and the matched ONT-1KGP SV. |
+| `ONT_1KGP_EndDist` | Difference (bp) between the end coordinates of the query SV and the matched ONT-1KGP SV. |
+| `CoLoRS_*` | Equivalent fields to `ONT_1KGP_*`, describing the matched SV in the **CoLoRS** database. |
+| `gnomAD_*` | Equivalent fields to `ONT_1KGP_*`, describing the matched SV in the **gnomAD-SV** database. |
+| `TR_OVERLAP_PCT` | Proportion of the SV overlapping UCSC **Simple Repeats** tracks. For example, a 10 kb deletion overlapping 2 kb of repeat sequence has a value of **20%**. Overlapping repeat intervals are merged before calculating the percentage. For insertions, this value is **100%** if the insertion breakpoint falls within a Simple Repeat. |
+| `SD_OVERLAP_PCT` | Proportion of the SV overlapping UCSC **Segmental Duplications** tracks, calculated identically to `TR_OVERLAP_PCT`. |
+

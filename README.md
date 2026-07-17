@@ -2,14 +2,10 @@
 Merge SurVeyor, hitSV/gcSV and Manta VCFs based on their matching accuracy in specific SV size bins from benchmarking data.
 
 ## Benchmarking data and analyses
-The VCFs used for benchmarking can be found at (zenodo link)
-Scripts for preprocessing ...
+The VCFs used for benchmarking (which the priority order for merging SVs is based off) can be found at (zenodo link)
+Scripts for processing/standardising the VCFs for Truvari bench and running the database matching analyses can be found in the benchmarking_analyses folder.
 
 ## Installation
-Requires Truvari v5.3.0, bcftools (only tested v1.15.1), and bedtools (only tested v2.29.0) to be available in your PATH. Also requires the pysam python library (only v0.22.1 tested). ANNOVAR must be installed and available in your PATH if using the ANNOVAR annotation option.
-
-**Note:** Other bcftools, bedtools and pysam versions should work, but carefully check output for any unexpected errors.
-
 If only the SV merging is required then clone this repository:
 
 `git clone https://github.com/jcslimmer/prioritySV`
@@ -31,14 +27,16 @@ This script processes single-sample **gcSV**, **Manta**, and **SurVeyor** VCFs. 
 > - Truvari v5.3.0
 > - bcftools (tested with v1.15.1)
 > - bedtools (tested with v2.29.0)
+> 
+> **Note:** Other bcftools, bedtools and pysam versions should work, but carefully check output for any unexpected errors.
 >
 > All dependencies must be installed and available in your `PATH`.
 >
 > **Optional dependency**
-> - ANNOVAR (required only when using `--annovar-dir`)
+> - ANNOVAR (required only when using `-a`, `--annovar-dir`)
 > - The `/annovar/` directory must also be available in your `PATH`.
 >
-> ######**SV caller compatibility**
+> **SV caller compatibility**
 >
 > **gcSV and SurVeyor**
 > - These scripts were developed and tested using **gcSV v1.0.0** and **SurVeyor v0.11.0**.
@@ -60,7 +58,7 @@ This script processes single-sample **gcSV**, **Manta**, and **SurVeyor** VCFs. 
 | `-r`, `--ref-fasta` | Reference FASTA file. |
 | `-o`, `--output-dir` | Output directory. |
 
-### Optional options
+### Additional options
 
 | Option | Description |
 | :----- | :---------- |

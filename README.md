@@ -1,8 +1,9 @@
 # prioritySV
-Merge SurVeyor, hitSV/gcSV and Manta VCFs based on their matching accuracy in specific SV size bins from benchmarking data.
+Merge SurVeyor, hitSV/gcSV and Manta VCFs based on benchmarking of their matching accuracy by SV type and in specific SV size bins.
 
 ## Benchmarking data and analyses
-The VCFs used for benchmarking (which the priority order for merging SVs is based off) can be found at (zenodo link)
+The VCFs used for benchmarking (which the priority order for merging SVs is based off) can be found at (zenodo link).
+
 Scripts for processing/standardising the VCFs for Truvari bench and running the database matching analyses can be found in the benchmarking_analyses folder.
 
 ## Installation
@@ -21,6 +22,12 @@ If allele frequency estimates or tandem repeat/segmental duplication annotation 
 `prioritysv.sh -i gcsv.vcf,manta.vcf,surveyor.vcf -s sample_id -r reference.fa -o /path/to/output_dir`
 
 This script processes single-sample **gcSV**, **Manta**, and **SurVeyor** VCFs. Structural variants are split by SV type and size, then merged according to a predefined priority order.
+
+For insertions/duplicatons, the priority orders in descending order per size bin are: <200bp (SurVeyor, gcSV, Manta), 200-500bp (gcSV, SurVeyor, Manta), 500bp+ (SurVeyor, gcSV, Manta).
+
+For deletions, the priority orders in descending order per size bin are: <200bp (gcSV, SurVeyor, Manta), 200-1000bp (SurVeyor, gcSV, Manta), 1kb+ (SurVeyor, Manta, gcSV).
+
+Inversions are merged using the priority order (SurVeyor, gcSV, Manta) if they have at least 10% reciprocal overlap and 50% size similarity. 
 
 > [!NOTE]
 > **Dependencies**

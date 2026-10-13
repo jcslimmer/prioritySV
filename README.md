@@ -17,11 +17,7 @@ If only the SV merging is required then clone this repository:
 
 `git clone https://github.com/jcslimmer/prioritySV`
 
-If allele frequency estimates or tandem repeat/segmental duplication annotation of SVs are required then download the following file to the main prioritySV directory:
-
-`wget Zenodo link with tarball`
-
-`tar -xzvf prioritySV_afreq_trsegdup_files.tar`
+Files required for allele frequency estimates and/or tandem repeat/segmental duplication annotation of SVs will be added soon. SV merging will work with the scripts as is following the usage below.
 
 ## Usage
 
@@ -50,8 +46,8 @@ This script processes single-sample **gcSV**, **Manta**, and **SurVeyor** VCFs. 
 > - **gcSV** has since been renamed and re-released as **HitSV**: https://github.com/hitbc/HitSV
 > - The scripts may **not** be compatible with VCF format changes introduced in newer HitSV and SurVeyor releases.
 > - There are currently no plans to update the scripts for compatibility with newer HitSV and SurVeyor releases. However, post an issue if running into errors and I will look into it as the fix should be fairly straightforward.
-> - gcSV v1.0.0 can be obtained from https://github.com/jcslimmer/prioritySV/tree/main/tools or 10.5281/zenodo.21126342.
-> - SurVeyor v0.11.0 and the trained model can be obtained from 10.5281/zenodo.21126342.
+> - gcSV v1.0.0 can be obtained from https://github.com/jcslimmer/prioritySV/tree/main/tools or https://doi.org/10.5281/zenodo.21126342
+> - SurVeyor v0.11.0 and the trained model can be obtained from https://github.com/Mesh89/SurVeyor
 >
 > **Manta**
 > - These scripts were developed and tested using **Manta v1.6.0**.

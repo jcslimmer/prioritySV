@@ -8,9 +8,9 @@ For deletions, the priority orders in descending order per size bin are: <200bp 
 Inversions are merged using the priority order (SurVeyor, gcSV, Manta) if they have at least 10% reciprocal overlap and 50% size similarity. 
 
 ## Benchmarking data and analyses
-The VCFs used for benchmarking (which the priority order for merging SVs is based off) can be found at 10.5281/zenodo.21126342.
+The VCFs used for benchmarking (which the priority order for merging SVs is based off) can be found at https://doi.org/10.5281/zenodo.21126342
 
-Scripts for processing/standardising the VCFs for Truvari bench and running the SV database matching analyses can be found in the benchmarking_analyses folder.
+Scripts for processing/standardising the VCFs for Truvari bench and running the SV database matching analyses can be found in the benchmarking_analyses folder or at https://doi.org/10.5281/zenodo.21126342
 
 ## Installation
 If only the SV merging is required then clone this repository:
